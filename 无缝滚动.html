@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>无缝滚动</title>
+	<style>
+	    .move ul{
+	    	margin:0px;
+	    	padding:0px;
+	    	list-style: none;
+	    }
+		.move{
+            height:100px;/*解决了塌陷问题*/
+            border:1px solid #f00;
+            overflow: hidden;
+            position: relative;
+            width:942px;
+         }
+        .move ul li{
+        	background: #ff0;
+        	width:154px;
+        	position:absolute;
+        	text-align:center;
+        	padding-top:30px;
+        	height:70px;
+        	cursor: pointer;
+        }
+	</style>
+	<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("div li").each(function(index,dom){
+				$(this).css({"left":index*157+"px"});
+			});
+			var sid="";
+			function move(){
+				sid=setInterval(function(){
+					$("div li").css({"left":"-=1px"});
+					if($("div li:eq(0)").position().left<=-942){
+						$("div li:lt(6)").each(function(index,dom){
+							$(this).css({"left":index*157+942+"px"});
+						});
+					}
+					if($("div li:eq(6)").position().left<=-942){
+						$("div li:gt(5)").each(function(index,dom){
+							$(this).css({"left":index*157+942+"px"});
+						});
+					}
+				},10);
+			}
+			move();
+		});
+	</script>
+</head>
+<body>
+	<div class="move">
+              	<ul>
+              		<li><a>ps</a></li>
+              		<li><a>html</a></li>
+              		<li><a>css</a></li>
+              		<li><a>js初级</a></li>
+              		<li><a>js中级</a></li>
+              		<li><a>jQuery</a></li>
+              		<li><a>ps</a></li>
+              		<li><a>html</a></li>
+              		<li><a>css</a></li>
+              		<li><a>js初级</a></li>
+              		<li><a>js中级</a></li>
+              		<li><a>jQuery</a></li>
+              	</ul>
+              </div>
+</body>
+</html>
